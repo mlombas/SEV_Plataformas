@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "GameLayer.h"
 
 #include <iostream>
 #include <string>
@@ -19,6 +20,8 @@ Game::Game()
 	// Escalado de imágenes de calidad 
 	// https://wiki.libsdl.org/SDL_HINT_RENDER_SCALE_QUALITY
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
+
+	gameLayer = new GameLayer(this);
 
 	loopActive = true; // bucle activo
 	loop();
