@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 
+constexpr int MIN_TIME_PER_FRAME = 1000 / 30;
+
 Game::Game() 
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) 
@@ -31,16 +33,16 @@ void Game::loop()
 	{
 		initTick = SDL_GetTicks();
 
-		// Controles
-		// Actualizar elementos
-		// Dibujar
+		gameLayer->processControls();
+		gameLayer->update();
+		gameLayer->draw();
 
 		endTick = SDL_GetTicks();
 		differenceTick = endTick - initTick;
 
-		if (differenceTick < (1000 / 30)) 
+		if (differenceTick < MIN_TIME_PER_FRAME) 
 		{
-			SDL_Delay((1000 / 30) - differenceTick);
+			SDL_Delay(MIN_TIME_PER_FRAME - differenceTick);
 		}
 	}
 }

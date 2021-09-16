@@ -4,6 +4,9 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
+#include "Layer.h"
+class Layer;
+
 #define WIDTH 480
 #define HEIGHT 320
 
@@ -15,5 +18,7 @@ public:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	bool loopActive;
+
+	Layer* gameLayer;
 };
 
