@@ -9,6 +9,7 @@ GameLayer::GameLayer(Game* game)
 }
 
 void GameLayer::init() {
+	player = new Player(50, 50, game);
 }
 
 void GameLayer::processControls() {
@@ -19,5 +20,7 @@ void GameLayer::update() {
 }
 
 void GameLayer::draw() {
+	player->draw();
+
 	SDL_RenderPresent(game->renderer); // Renderiza
 }
