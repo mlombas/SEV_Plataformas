@@ -11,7 +11,7 @@ public:
 
 	virtual void draw();
 
-private:
+protected:
 	SDL_Texture* texture;
 
 	float x;
