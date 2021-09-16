@@ -5,4 +5,9 @@ class Player :
 {
 public:
 	Player(float x, float y, Game* game);
+
+	void update();
+
+	void moveX(float x);
+	void moveY(float y);
 };
