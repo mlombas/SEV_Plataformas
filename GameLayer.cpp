@@ -119,6 +119,8 @@ void GameLayer::processControls()
 void GameLayer::keysToControls(const SDL_Event& event) 
 {
 	int code = event.key.keysym.sym;
+	if (event.type == SDL_QUIT)
+		game->loopActive = false;
 	if (event.type == SDL_KEYDOWN) 
 	{
 		switch (code) 
@@ -140,6 +142,9 @@ void GameLayer::keysToControls(const SDL_Event& event)
 				break;
 			case SDLK_ESCAPE:
 				game->loopActive = false;
+				break;
+			case SDLK_1:
+				game->scale();
 				break;
 		}
 	}

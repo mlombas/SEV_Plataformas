@@ -20,5 +20,9 @@ public:
 	bool loopActive;
 
 	Layer* gameLayer;
+
+	void scale();
+	bool scaledToMax = false;
+	float scaleLower = 1;
 };
 
