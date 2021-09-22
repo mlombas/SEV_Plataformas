@@ -1,3 +1,4 @@
+#include <cmath>
 #include "Player.h"
 
 Player::Player(float x, float y, Game* game)
@@ -5,10 +6,23 @@ Player::Player(float x, float y, Game* game)
 {
 }
 
-void Player::update() 
+void Player::update()
 {
 	x += vx;
 	y += vy;
+
+	shootTime = std::min(shootTime + 1, shootCadence);
+}
+
+Projectile* Player::shoot() 
+{
+	if(shootTime == shootCadence)
+	{
+		shootTime = 0;
+		return new Projectile(x, y, game);
+	}
+
+	return NULL;
 }
 
 void Player::moveX(float axis) 

@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "Background.h"
 #include "Enemy.h"
+#include "Projectile.h"
 
 class GameLayer : public Layer
 {
@@ -18,12 +19,19 @@ public:
 	void draw() override;
 	void keysToControls(const SDL_Event& event);
 
+private:
 	Player* player;
 	bool controlShoot = false;
 	int controlMoveY = 0;
 	int controlMoveX = 0;
 
 	std::list<Enemy*> enemies;
+	std::list<Projectile*> projectiles;
 
 	Background* background;
+
+	const unsigned int newEnemyCooldown = 110;
+	unsigned int newEnemyTime = 0;
+
+	void newEnemy();
 };

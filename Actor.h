@@ -8,7 +8,10 @@ class Actor
 {
 public:
 	Actor(std::string filename, float x, float y, int width, int height, Game* game); 
+	
+	bool isOverlap(const Actor&) const;
 
+	virtual void update();
 	virtual void draw();
 
 protected:

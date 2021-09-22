@@ -1,6 +1,8 @@
 #include "GameLayer.h"
 
+#include <cstdlib>
 #include <iostream>
+#include "Actor.h"
 
 GameLayer::GameLayer(Game* game)
 	: Layer(game)
@@ -14,18 +16,58 @@ void GameLayer::init()
 	background = new Background("res/fondo.png", WIDTH * .5, HEIGHT * .5, game);
 
 	enemies.clear();
-	int nEnemies = 3;
-	for(int n = 0; n < nEnemies; n++)
-		enemies.push_back(new Enemy(WIDTH - 50, HEIGHT / nEnemies * n + 50, game));
+	newEnemy();
+
+	projectiles.clear();
+}
+
+//TODO refine
+void GameLayer::newEnemy() 
+{
+	int rX = (std::rand() % (600-500)) + 1 + 500;
+	int rY = (std::rand() % (300-60)) + 1 + 60;
+	enemies.push_back(new Enemy(rX, rY, game));
+	newEnemyTime = 0;
 }
 
 void GameLayer::update() 
 {
+	if(newEnemyTime++ >= newEnemyCooldown)
+		newEnemy();
+
 	std::cout << "update GameLayer" << std::endl;
 
 	player->update();
 
-	for(auto const &enemy : enemies) enemy->update();
+	for(auto const &enemy : enemies) 
+	{
+		std::cout << "update enemy" << std::endl;
+		enemy->update();
+		if(player->isOverlap(*enemy))
+		{
+			init();
+			return;
+		}
+	}
+
+	auto itP = projectiles.begin();
+	while(itP != projectiles.end())
+	{
+		(*itP)->update();
+		bool hit = false;
+
+		auto itE = enemies.begin();
+		while (itE != enemies.end())
+			if ((*itP)->isOverlap(**itE))
+			{
+				hit = true;
+				itE = enemies.erase(itE);
+			}
+			else itE++;
+
+		if (hit) itP = projectiles.erase(itP);
+		else itP++;
+	}
 }
 
 void GameLayer::draw() 
@@ -33,6 +75,7 @@ void GameLayer::draw()
 	background->draw();
 
 	for(auto const &enemy : enemies) enemy->draw();
+	for(auto const &projectile : projectiles) projectile->draw();
 
 	player->draw();
 
@@ -46,6 +89,8 @@ void GameLayer::processControls()
 
 	if(controlShoot)
 	{
+		Projectile* projectile = player->shoot();
+		if(projectile != NULL) projectiles.push_back(projectile);
 	}
 
 	// Eje X
@@ -92,6 +137,9 @@ void GameLayer::keysToControls(const SDL_Event& event)
 				break;
 			case SDLK_SPACE: // dispara
 				controlShoot = true;
+				break;
+			case SDLK_ESCAPE:
+				game->loopActive = false;
 				break;
 		}
 	}
