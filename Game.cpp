@@ -1,8 +1,10 @@
 #include "Game.h"
-#include "GameLayer.h"
 
+#include <cmath>
 #include <iostream>
 #include <string>
+
+#include "GameLayer.h"
 
 constexpr int MIN_TIME_PER_FRAME = 1000 / 30;
 
@@ -21,6 +23,9 @@ Game::Game()
 	// https://wiki.libsdl.org/SDL_HINT_RENDER_SCALE_QUALITY
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
 
+	TTF_Init();
+	font = TTF_OpenFont("res/sans.ttf", 24);
+
 	gameLayer = new GameLayer(this);
 
 	loopActive = true; // bucle activo
@@ -33,23 +38,18 @@ void Game::scale(){
 	if (scaledToMax) {
 		SDL_DisplayMode PCdisplay;
 		SDL_GetCurrentDisplayMode(0, &PCdisplay);
+
 		float scaleX = (float)PCdisplay.w / (float)WIDTH;
 		float scaleY = (float)PCdisplay.h / (float)HEIGHT;
-		// Necesitamos la menor de las 2 escalas para no deformar el juego
-		scaleLower = scaleX; 
-		if (scaleY < scaleX) {
-			scaleLower = scaleY;
-		}
-		// Cambiar dimensiones ventana
+		scaleLower = std::min(scaleX, scaleY);
+
 		SDL_SetWindowSize(window, WIDTH * scaleLower, HEIGHT * scaleLower);
-		// Cambiar escala del render
 		SDL_RenderSetScale(renderer, scaleLower, scaleLower);
 	}
-	else { // Escala Original
+	else {
 		scaleLower = 1;
-		// Cambiar dimensiones ventana
+
 		SDL_SetWindowSize(window, WIDTH, HEIGHT);
-		// Cambiar escala del render
 		SDL_RenderSetScale(renderer, 1, 1);
 	}
 

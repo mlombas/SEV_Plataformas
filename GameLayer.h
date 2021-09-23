@@ -8,6 +8,7 @@
 #include "Background.h"
 #include "Enemy.h"
 #include "Projectile.h"
+#include "Text.h"
 
 class GameLayer : public Layer
 {
@@ -29,6 +30,9 @@ private:
 	std::list<Projectile*> projectiles;
 
 	Background* background;
+	Actor* backgroundPoints;
+	Text* textPoints;
+	int points = 0;
 
 	const unsigned int newEnemyCooldown = 110;
 	unsigned int newEnemyTime = 0;

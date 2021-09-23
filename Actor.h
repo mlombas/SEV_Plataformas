@@ -12,7 +12,9 @@ public:
 	bool isOverlap(const Actor&) const;
 
 	virtual void update();
-	virtual void draw();
+	virtual void draw() const;
+
+	virtual bool outsideScreen() const;
 
 protected:
 	SDL_Texture* texture;
@@ -25,8 +27,10 @@ protected:
 
 	int width;
 	int height;
-	int fileWidth;
-	int fileHeight;
 
 	Game* game; // referencia al juego
+
+private:
+	int fileWidth;
+	int fileHeight;
 };

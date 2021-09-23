@@ -13,7 +13,10 @@ GameLayer::GameLayer(Game* game)
 void GameLayer::init() 
 {
 	player = new Player(50, 50, game);
-	background = new Background("res/fondo.png", WIDTH * .5, HEIGHT * .5, game);
+	background = new Background("res/fondo.png", game->WIDTH * .5, game->HEIGHT * .5, game);
+	backgroundPoints = new Actor("res/icono_puntos.png", 
+			game->WIDTH * 0.85, game->HEIGHT * 0.05, 24, 24, game);
+	textPoints = new Text("hey", game->WIDTH * .95, game->HEIGHT * .05, game);
 
 	enemies.clear();
 	newEnemy();
@@ -21,11 +24,17 @@ void GameLayer::init()
 	projectiles.clear();
 }
 
-//TODO refine
+int randomNumber(int min, int max) 
+{
+	return std::rand() % (max - min) + min + 1;
+}
+
 void GameLayer::newEnemy() 
 {
-	int rX = (std::rand() % (600-500)) + 1 + 500;
-	int rY = (std::rand() % (300-60)) + 1 + 60;
+	const int minX = 500, maxX = 600,
+			minY = 60, maxY = 300;
+	int rX = randomNumber(minX, maxX);
+	int rY = randomNumber(minY, maxY);
 	enemies.push_back(new Enemy(rX, rY, game));
 	newEnemyTime = 0;
 }
@@ -62,12 +71,17 @@ void GameLayer::update()
 			{
 				hit = true;
 				itE = enemies.erase(itE);
+				points++;
 			}
 			else itE++;
 
-		if (hit) itP = projectiles.erase(itP);
+		//We also eliminate the projectile when it leaves screen, as it
+		//is no longer relevant
+		if (hit || (*itP)->outsideScreen()) itP = projectiles.erase(itP);
 		else itP++;
 	}
+
+	textPoints->set(std::to_string(points));
 }
 
 void GameLayer::draw() 
@@ -78,6 +92,9 @@ void GameLayer::draw()
 	for(auto const &projectile : projectiles) projectile->draw();
 
 	player->draw();
+
+	backgroundPoints->draw();
+	textPoints->draw();
 
 	SDL_RenderPresent(game->renderer); // Renderiza
 }

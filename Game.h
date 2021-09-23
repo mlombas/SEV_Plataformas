@@ -7,9 +7,6 @@
 #include "Layer.h"
 class Layer;
 
-#define WIDTH 480
-#define HEIGHT 320
-
 class Game
 {
 public:
@@ -19,9 +16,17 @@ public:
 	SDL_Renderer* renderer;
 	bool loopActive;
 
+	//TODO: Make font manager
+	TTF_Font* font;
+
 	Layer* gameLayer;
 
+	const unsigned int WIDTH = 480;
+	const unsigned int HEIGHT = 320;
+
 	void scale();
+
+private:
 	bool scaledToMax = false;
 	float scaleLower = 1;
 };

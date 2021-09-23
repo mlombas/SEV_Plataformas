@@ -35,7 +35,7 @@ bool Actor::isOverlap(const Actor& actor) const
 
 void Actor::update() {}
 
-void Actor::draw()
+void Actor::draw() const
 {
 	// Recorte en el fichero de la imagen
 	SDL_Rect source;
@@ -54,4 +54,10 @@ void Actor::draw()
 
 	SDL_RenderCopyEx(game->renderer, 
 		texture, &source, &destination, 0, NULL, SDL_FLIP_NONE);
+}
+
+bool Actor::outsideScreen() const
+{
+	return x + width/2 < 0 || x - width/2 > game->WIDTH ||
+		y + height/2 < 0 || y - height/2 > game->HEIGHT;
 }

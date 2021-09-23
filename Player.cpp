@@ -1,4 +1,5 @@
 #include <cmath>
+#include <algorithm>
 #include "Player.h"
 
 Player::Player(float x, float y, Game* game)
@@ -10,6 +11,9 @@ void Player::update()
 {
 	x += vx;
 	y += vy;
+
+	x = std::clamp(x, 0.f, float(game->WIDTH));
+	y = std::clamp(y, 0.f, float(game->HEIGHT));
 
 	shootTime = std::min(shootTime + 1, shootCadence);
 }
