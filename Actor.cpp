@@ -15,7 +15,7 @@ Actor::Actor(std::string filename, float x, float y, int width, int height, Game
 	// posición
 	this->x = x;
 	this->y = y;
-
+	
 	// lo que va a medir en el juego
 	this->width = width;
 	this->height = height;
@@ -23,7 +23,7 @@ Actor::Actor(std::string filename, float x, float y, int width, int height, Game
 
 Actor::~Actor()
 {
-	SDL_DestroTexture(texture);
+	SDL_DestroyTexture(texture);
 }
 
 bool Actor::isOverlap(const Actor& actor) const

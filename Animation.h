@@ -13,10 +13,20 @@ class Animation
 				int updateFrecuence, int totalFrames,
 			   	Game* game
 				);
+		Animation(
+				std::string filename,
+			   	float actorWidth, float actorHeight,
+				float fileWidth, float fileHeight,
+				int updateFrecuence, int totalFrames,
+				bool loop,
+			   	Game* game
+				);
 		bool update();
 		void draw(float x, float y);
 
 private:
+		bool loop;
+
 		int actorWidth;
 		int actorHeight;
 		int fileWidth;

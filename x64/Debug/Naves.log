@@ -1,0 +1,46 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Naves.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Actor.cpp
+C:\Uni\SEV\videojuegos\SEV_Plataformas\Actor.cpp(54,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Uni\SEV\videojuegos\SEV_Plataformas\Actor.cpp(55,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Player.cpp
+C:\Uni\SEV\videojuegos\SEV_Plataformas\Player.cpp(8,68): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Uni\SEV\videojuegos\SEV_Plataformas\Player.cpp(8,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Uni\SEV\videojuegos\SEV_Plataformas\Player.cpp(10,69): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Uni\SEV\videojuegos\SEV_Plataformas\Player.cpp(10,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Uni\SEV\videojuegos\SEV_Plataformas\Player.cpp(12,76): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Uni\SEV\videojuegos\SEV_Plataformas\Player.cpp(12,69): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Uni\SEV\videojuegos\SEV_Plataformas\Player.cpp(14,77): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Uni\SEV\videojuegos\SEV_Plataformas\Player.cpp(14,70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+Actor.obj : error LNK2019: unresolved external symbol SDL_CreateTextureFromSurface referenced in function "public: __cdecl Actor::Actor(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,float,float,int,int,class Game *)" (??0Actor@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@MMHHPEAVGame@@@Z)
+Animation.obj : error LNK2001: unresolved external symbol SDL_CreateTextureFromSurface
+Text.obj : error LNK2001: unresolved external symbol SDL_CreateTextureFromSurface
+Actor.obj : error LNK2019: unresolved external symbol SDL_RenderCopyEx referenced in function "public: virtual void __cdecl Actor::draw(void)const " (?draw@Actor@@UEBAXXZ)
+Animation.obj : error LNK2001: unresolved external symbol SDL_RenderCopyEx
+Actor.obj : error LNK2019: unresolved external symbol SDL_DestroyTexture referenced in function "public: __cdecl Actor::~Actor(void)" (??1Actor@@QEAA@XZ)
+Text.obj : error LNK2001: unresolved external symbol SDL_DestroyTexture
+Actor.obj : error LNK2019: unresolved external symbol IMG_Load referenced in function "public: __cdecl Actor::Actor(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,float,float,int,int,class Game *)" (??0Actor@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@MMHHPEAVGame@@@Z)
+Animation.obj : error LNK2001: unresolved external symbol IMG_Load
+Game.obj : error LNK2019: unresolved external symbol SDL_GetError referenced in function "public: __cdecl Game::Game(void)" (??0Game@@QEAA@XZ)
+Game.obj : error LNK2019: unresolved external symbol SDL_GetCurrentDisplayMode referenced in function "public: void __cdecl Game::scale(void)" (?scale@Game@@QEAAXXZ)
+Game.obj : error LNK2019: unresolved external symbol SDL_SetWindowTitle referenced in function "public: __cdecl Game::Game(void)" (??0Game@@QEAA@XZ)
+Game.obj : error LNK2019: unresolved external symbol SDL_SetWindowSize referenced in function "public: void __cdecl Game::scale(void)" (?scale@Game@@QEAAXXZ)
+Game.obj : error LNK2019: unresolved external symbol SDL_SetHint referenced in function "public: __cdecl Game::Game(void)" (??0Game@@QEAA@XZ)
+Game.obj : error LNK2019: unresolved external symbol SDL_CreateWindowAndRenderer referenced in function "public: __cdecl Game::Game(void)" (??0Game@@QEAA@XZ)
+Game.obj : error LNK2019: unresolved external symbol SDL_RenderSetScale referenced in function "public: void __cdecl Game::scale(void)" (?scale@Game@@QEAAXXZ)
+Game.obj : error LNK2019: unresolved external symbol SDL_GetTicks referenced in function "public: void __cdecl Game::loop(void)" (?loop@Game@@QEAAXXZ)
+Game.obj : error LNK2019: unresolved external symbol SDL_Delay referenced in function "public: void __cdecl Game::loop(void)" (?loop@Game@@QEAAXXZ)
+Game.obj : error LNK2019: unresolved external symbol SDL_Init referenced in function "public: __cdecl Game::Game(void)" (??0Game@@QEAA@XZ)
+Game.obj : error LNK2019: unresolved external symbol TTF_Init referenced in function "public: __cdecl Game::Game(void)" (??0Game@@QEAA@XZ)
+Game.obj : error LNK2019: unresolved external symbol TTF_OpenFont referenced in function "public: __cdecl Game::Game(void)" (??0Game@@QEAA@XZ)
+GameLayer.obj : error LNK2019: unresolved external symbol SDL_PollEvent referenced in function "public: virtual void __cdecl GameLayer::processControls(void)" (?processControls@GameLayer@@UEAAXXZ)
+GameLayer.obj : error LNK2019: unresolved external symbol SDL_RenderPresent referenced in function "public: virtual void __cdecl GameLayer::draw(void)" (?draw@GameLayer@@UEAAXXZ)
+Text.obj : error LNK2019: unresolved external symbol SDL_FreeSurface referenced in function "public: void __cdecl Text::draw(void)const " (?draw@Text@@QEBAXXZ)
+Text.obj : error LNK2019: unresolved external symbol SDL_RenderCopy referenced in function "public: void __cdecl Text::draw(void)const " (?draw@Text@@QEBAXXZ)
+Text.obj : error LNK2019: unresolved external symbol TTF_RenderText_Blended referenced in function "public: void __cdecl Text::draw(void)const " (?draw@Text@@QEBAXXZ)
+C:\Uni\SEV\videojuegos\Naves\dependencies\lib\SDL2.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Uni\SEV\videojuegos\Naves\dependencies\lib\SDL2main.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Uni\SEV\videojuegos\Naves\dependencies\lib\SDL2_image.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Uni\SEV\videojuegos\Naves\dependencies\lib\SDL2_ttf.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Uni\SEV\videojuegos\Naves\dependencies\lib\SDL2_mixer.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Uni\SEV\videojuegos\SEV_Plataformas\x64\Debug\Plataformas.exe : fatal error LNK1120: 21 unresolved externals
