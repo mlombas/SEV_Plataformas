@@ -8,13 +8,13 @@ class Actor
 {
 public:
 	Actor(std::string filename, float x, float y, int width, int height, Game* game); 
-	
-	bool isOverlap(const Actor&) const;
+	~Actor();
 
 	virtual void update();
 	virtual void draw() const;
 
-	virtual bool outsideScreen() const;
+	bool isOverlap(const Actor&) const;
+	bool outsideScreen() const;
 
 protected:
 	SDL_Texture* texture;

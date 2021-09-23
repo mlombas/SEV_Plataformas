@@ -21,6 +21,11 @@ Actor::Actor(std::string filename, float x, float y, int width, int height, Game
 	this->height = height;
 }
 
+Actor::~Actor()
+{
+	SDL_DestroTexture(texture);
+}
+
 bool Actor::isOverlap(const Actor& actor) const
 {
 	bool overlap = true;
