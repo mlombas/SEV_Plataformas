@@ -42,12 +42,11 @@ Animation::Animation(
 	source.h = frameHeigt; 
 }
 
-//TODO: fix the blink
 bool Animation::update() 
 {
-	if(updateTime++ > updateFrecuence)
+	if(++updateTime > updateFrecuence)
 	{
-		if(currentFrame++ >= totalFrames)
+		if(++currentFrame >= totalFrames)
 		{ 
 			currentFrame = 0;
 			if(!loop) return true;

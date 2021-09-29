@@ -71,7 +71,11 @@ Projectile* Player::shoot()
 		shootTime = 0;
 
 		currentState = State::SHOOTING;
-		return new Projectile(x, y, game);
+		return new Projectile(
+				x, y,
+				//Invert shooting direction if player is looking at the other way
+			   	20 * (int(orientation == Orientation::RIGHT) * 2 - 1), 20,
+			   	game);
 	}
 
 	return NULL;

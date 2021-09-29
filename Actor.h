@@ -16,6 +16,9 @@ public:
 	bool isOverlap(const Actor&) const;
 	bool outsideScreen() const;
 
+	void markForRemoval();
+	bool isMarkedForRemoval();
+
 protected:
 	SDL_Texture* texture;
 
@@ -28,9 +31,13 @@ protected:
 	int width;
 	int height;
 
+	bool removal = false;
+
 	Game* game; // referencia al juego
 
 private:
 	int fileWidth;
 	int fileHeight;
 };
+
+

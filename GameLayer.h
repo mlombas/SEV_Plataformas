@@ -37,5 +37,6 @@ private:
 	const unsigned int newEnemyCooldown = 110;
 	unsigned int newEnemyTime = 0;
 
+
 	void newEnemy();
 };

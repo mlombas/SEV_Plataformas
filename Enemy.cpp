@@ -5,6 +5,14 @@ Enemy::Enemy(float x, float y, Game* game)
 {
 	vx = -1;
 
+	state = State::MOVING;
+
+	aDying = new Animation(
+			"res/enemigo_morir.png",
+		   	width, height,
+			280, 40, 6, 8,
+		   	false, game
+			);
 	aMoving = new Animation(
 			"res/enemigo_movimiento.png",
 		   	width, height, 
@@ -16,10 +24,28 @@ Enemy::Enemy(float x, float y, Game* game)
 
 void Enemy::update()
 {
-	x = x + vx;
+	if(state == State::MOVING)
+		x = x + vx;
 
-	animation->update();
+	switch(state) {
+		case State::MOVING:
+			animation = aMoving;
+			break;
+		case State::DYING:
+			animation = aDying;
+			break;
+	}
+	bool endAnim = animation->update();
+	if (endAnim && state == State::DYING)
+	{
+		state = State::DEAD;
+		markForRemoval();
+	}
 } 
+
+void Enemy::impacted() {
+	state = State::DYING;
+}
 
 void Enemy::draw() const
 {

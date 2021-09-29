@@ -44,13 +44,11 @@ void GameLayer::update()
 	if(newEnemyTime++ >= newEnemyCooldown)
 		newEnemy();
 
-	std::cout << "update GameLayer" << std::endl;
 
 	player->update();
 
 	for(auto const &enemy : enemies) 
 	{
-		std::cout << "update enemy" << std::endl;
 		enemy->update();
 		if(player->isOverlap(*enemy))
 		{
@@ -59,27 +57,34 @@ void GameLayer::update()
 		}
 	}
 
-	auto itP = projectiles.begin();
-	while(itP != projectiles.end())
+	for(auto const &projectile : projectiles)
 	{
-		(*itP)->update();
-		bool hit = false;
+		projectile->update();
 
-		auto itE = enemies.begin();
-		while (itE != enemies.end())
-			if ((*itP)->isOverlap(**itE))
+		bool hit = false;
+		for (auto const& enemy : enemies)
+			if (projectile->isOverlap(*enemy))
 			{
 				hit = true;
-				itE = enemies.erase(itE);
-				points++;
+				enemy->impacted();
 			}
-			else itE++;
 
-		//We also eliminate the projectile when it leaves screen, as it
-		//is no longer relevant
-		if (hit || (*itP)->outsideScreen()) itP = projectiles.erase(itP);
-		else itP++;
+		if(hit) projectile->markForRemoval();
 	}
+
+	auto itP = projectiles.begin();
+	while (itP != projectiles.end())
+		if ((*itP)->isMarkedForRemoval())
+			itP = projectiles.erase(itP);
+		else
+			itP++;
+
+	auto itE = enemies.begin();
+	while (itE != enemies.end())
+		if ((*itE)->isMarkedForRemoval())
+			itE = enemies.erase(itE);
+		else
+			itE++;
 
 	textPoints->set(std::to_string(points));
 }

@@ -1,9 +1,10 @@
 #include "Projectile.h"
 
-Projectile::Projectile(float x, float y, Game* game) : 
+Projectile::Projectile(float x, float y, float vx, float vy, Game* game) : 
 	Actor("res/disparo_jugador2.png", x, y, 20, 20, game)
-{
-	vx = 9;
+{ 
+	this->vx = vx;
+	this->vy = vy;
 }
 
 void Projectile::update() 

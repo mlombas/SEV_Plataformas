@@ -61,6 +61,16 @@ void Actor::draw() const
 		texture, &source, &destination, 0, NULL, SDL_FLIP_NONE);
 }
 
+void Actor::markForRemoval() 
+{
+	removal = true;
+}
+
+bool Actor::isMarkedForRemoval() 
+{
+	return removal;
+}
+
 bool Actor::outsideScreen() const
 {
 	return x + width/2 < 0 || x - width/2 > game->WIDTH ||
