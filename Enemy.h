@@ -16,7 +16,7 @@ public:
 
 public:
 	Enemy(float x, float y, Game* game);
-	virtual void draw() const override;
+	virtual void draw(float scrollX = 0) const override;
 	void update();
 	void impacted();
 

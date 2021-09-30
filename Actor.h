@@ -11,17 +11,17 @@ public:
 	~Actor();
 
 	virtual void update();
-	virtual void draw() const;
+	virtual void draw(float scrollX = 0) const;
 
 	bool isOverlap(const Actor&) const;
-	bool outsideScreen() const;
+	bool outsideScreen(float scrollX = 0) const;
 
 	void markForRemoval();
 	bool isMarkedForRemoval();
 
-protected:
-	SDL_Texture* texture;
+	void moveToFloor(float x, float y);
 
+public:
 	float x;
 	float y;
 
@@ -30,6 +30,11 @@ protected:
 
 	int width;
 	int height;
+
+	bool collisionDown;
+
+protected:
+	SDL_Texture* texture;
 
 	bool removal = false;
 

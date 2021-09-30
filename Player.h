@@ -25,14 +25,20 @@ public:
 	Player(float x, float y, Game* game);
 
 	void update() override;
-	void draw() const override;
+	void draw(float scrollX = 0) const override;
 
 	Projectile* shoot();
 
 	void moveX(float x);
 	void moveY(float y);
+	void jump();
+
+	float getX();
+	float getY();
 
 private:
+	bool onAir;
+	
 	const unsigned int shootCadence = 30;
 	unsigned int shootTime = 0;
 

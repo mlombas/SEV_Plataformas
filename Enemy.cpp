@@ -24,9 +24,6 @@ Enemy::Enemy(float x, float y, Game* game)
 
 void Enemy::update()
 {
-	if(state == State::MOVING)
-		x = x + vx;
-
 	switch(state) {
 		case State::MOVING:
 			animation = aMoving;
@@ -47,7 +44,7 @@ void Enemy::impacted() {
 	state = State::DYING;
 }
 
-void Enemy::draw() const
+void Enemy::draw(float scrollX) const
 {
-	animation->draw(x, y);
+	animation->draw(x - scrollX, y);
 }

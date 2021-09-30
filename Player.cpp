@@ -5,6 +5,8 @@
 Player::Player(float x, float y, Game* game)
 	: Actor("res/jugador.png", x, y, 50, 57, game) 
 {
+	onAir = false;
+
 	aIdleRight = new Animation("res/jugador_idle_derecha.png", width, height,
 			320, 40, 6, 8, game);
 	aIdleLeft = new Animation("res/jugador_idle_izquierda.png", width, height,
@@ -22,8 +24,7 @@ Player::Player(float x, float y, Game* game)
 
 void Player::update()
 {
-	x += vx;
-	y += vy;
+	onAir = !collisionDown;
 
 	shootTime = std::min(shootTime + 1, shootCadence);
 
@@ -59,9 +60,9 @@ void Player::update()
 	if(finish) currentState = State::MOVING;
 }
 
-void Player::draw() const
+void Player::draw(float scrollX) const
 {
-	animation->draw(x, y);
+	animation->draw(x - scrollX, y);
 }
 
 Projectile* Player::shoot() 
@@ -90,3 +91,15 @@ void Player::moveY(float axis)
 {
 	vy = axis * 3;
 }
+
+void Player::jump() 
+{
+	if(!onAir)
+	{
+		vy = -16;
+		onAir = false;
+	}
+}
+
+float Player::getX() { return x; }
+float Player::getY() { return y; }

@@ -40,7 +40,7 @@ bool Actor::isOverlap(const Actor& actor) const
 
 void Actor::update() {}
 
-void Actor::draw() const
+void Actor::draw(float scrollX) const
 {
 	// Recorte en el fichero de la imagen
 	SDL_Rect source;
@@ -51,7 +51,7 @@ void Actor::draw() const
 
 	// Donde se va a pegar en el renderizador
 	SDL_Rect destination;
-	destination.x = x - int(width / 2);
+	destination.x = x - int(width / 2) - scrollX;
 	destination.y = y - int(height / 2);
 	destination.w = width;
 	destination.h = height;
@@ -71,8 +71,15 @@ bool Actor::isMarkedForRemoval()
 	return removal;
 }
 
-bool Actor::outsideScreen() const
+void Actor::moveToFloor(float x, float y)
 {
-	return x + width/2 < 0 || x - width/2 > game->WIDTH ||
+	this->x = x;
+	this->y = y - this->height / 2;
+}
+
+bool Actor::outsideScreen(float scrollX) const
+{
+	int xp = x - scrollX;
+	return xp + width/2 < 0 || xp - width/2 > game->WIDTH ||
 		y + height/2 < 0 || y - height/2 > game->HEIGHT;
 }
